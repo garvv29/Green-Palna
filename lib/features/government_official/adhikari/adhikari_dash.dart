@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'totaldel.dart';
-import 'misseddeadlines.dart';
-import 'notifications_page.dart';
-import 'sapling_distribution_ui.dart';
+import '../../admin/totaldel.dart';
+import '../../admin/misseddeadlines.dart';
+import '../../admin/notifications_page.dart';
+import '../../admin/sapling_distribution_ui.dart';
 
-class AdminDashboardPage extends StatefulWidget {
-  const AdminDashboardPage({super.key});
+class AdhikariDashboardPage extends StatefulWidget {
+  const AdhikariDashboardPage({super.key});
 
   @override
-  State<AdminDashboardPage> createState() => _AdminDashboardPageState();
+  State<AdhikariDashboardPage> createState() => _AdhikariDashboardPageState();
 }
 
-class _AdminDashboardPageState extends State<AdminDashboardPage> {
+class _AdhikariDashboardPageState extends State<AdhikariDashboardPage> {
   // Set initial selected index to 0 for Home tab
-  int _selectedIndex = 0; // 0: Home, 1: Workers, 2: Notifications
+  int _selectedIndex = 0; // 0: Home, 1: Workers
 
   // Dummy data for dropdowns and workers
   final List<String> _districts = [
@@ -93,7 +93,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
       body: IndexedStack(
         index: _selectedIndex,
         children: [
-          // HOME TAB (Admin Dashboard Overview)
+          // HOME TAB (Adhikari Dashboard Overview)
           SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -320,92 +320,6 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
               ),
             ),
           ),
-          // ADHIKARI TAB (Same UI as Workers)
-          SafeArea(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Search Section Title
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 20, 16, 12),
-                    child: Text(
-                      'Search Adhikari',
-                      style: TextStyle(
-                        color: darkTextColor,
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: -0.015 * 22,
-                      ),
-                    ),
-                  ),
-                  // Dropdown Filters
-                  _buildDropdownFilter(
-                    label: 'District',
-                    options: _districts,
-                    value: _selectedDistrict,
-                    onChanged: (val) => setState(() => _selectedDistrict = val),
-                    darkTextColor: darkTextColor,
-                    secondaryTextColor: secondaryTextColor,
-                    borderColor: lightBorderColor,
-                    backgroundColor: backgroundColor,
-                  ),
-                  _buildDropdownFilter(
-                    label: 'Post',
-                    options: ['Collector', 'SDM', 'Tehsildar', 'BDO', 'Panchayat Secretary'],
-                    value: _selectedSubdivision,
-                    onChanged: (val) => setState(() => _selectedSubdivision = val),
-                    darkTextColor: darkTextColor,
-                    secondaryTextColor: secondaryTextColor,
-                    borderColor: lightBorderColor,
-                    backgroundColor: backgroundColor,
-                  ),
-                  // Adhikari Section Title
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 20, 16, 12),
-                    child: Text(
-                      'Adhikari',
-                      style: TextStyle(
-                        color: darkTextColor,
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: -0.015 * 22,
-                      ),
-                    ),
-                  ),
-                  // Adhikari List Items
-                  _buildLocalWorkerItem(
-                    imageUrl: 'https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659652_1280.png',
-                    name: 'Rajesh Kumar',
-                    number: '9876543210',
-                    address: '15 Government Colony, Raipur',
-                    pendingWork: 5,
-                    darkTextColor: darkTextColor,
-                    secondaryTextColor: secondaryTextColor,
-                  ),
-                  _buildLocalWorkerItem(
-                    imageUrl: 'https://cdn.pixabay.com/photo/2017/03/01/22/01/avatar-2109968_1280.png',
-                    name: 'Smita Verma',
-                    number: '9123456780',
-                    address: '23 Administrative Block, Bilaspur',
-                    pendingWork: 3,
-                    darkTextColor: darkTextColor,
-                    secondaryTextColor: secondaryTextColor,
-                  ),
-                  _buildLocalWorkerItem(
-                    imageUrl: 'https://cdn.pixabay.com/photo/2017/01/31/13/41/avatar-2024765_1280.png',
-                    name: 'Amit Patel',
-                    number: '9988776655',
-                    address: '45 Civil Lines, Durg',
-                    pendingWork: 7,
-                    darkTextColor: darkTextColor,
-                    secondaryTextColor: secondaryTextColor,
-                  ),
-                  const SizedBox(height: 20),
-                ],
-              ),
-            ),
-          ),
         ],
       ),
       bottomNavigationBar: Container(
@@ -433,13 +347,6 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
               isActive: _selectedIndex == 1,
               onTap: () => setState(() => _selectedIndex = 1),
             ),
-            _buildBottomNavItem(
-              icon: Icons.person,
-              label: 'Adhikari',
-              color: _selectedIndex == 2 ? darkTextColor : secondaryTextColor,
-              isActive: _selectedIndex == 2,
-              onTap: () => setState(() => _selectedIndex = 2),
-            ),
           ],
         ),
       ),
@@ -450,13 +357,11 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
   String _getAppBarTitle(int index) {
     switch (index) {
       case 0:
-        return 'Admin Dashboard';
+        return 'Adhikari Dashboard';
       case 1:
         return 'Mitanin';
-      case 2:
-        return 'Adhikari';
       default:
-        return 'Admin Dashboard';
+        return 'Adhikari Dashboard';
     }
   }
 

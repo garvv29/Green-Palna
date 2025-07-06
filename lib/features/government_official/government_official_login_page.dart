@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gp1/features/government_official/local_worker/local_worker_dashboard_page.dart'; // Import the LocalWorkerDashboardPage
+import 'package:gp1/features/government_official/adhikari/adhikari_dash.dart'; // Import the AdhikariDashboardPage
 
 class GovernmentOfficialLoginPage extends StatefulWidget {
   const GovernmentOfficialLoginPage({super.key});
@@ -197,7 +198,7 @@ class _GovernmentOfficialLoginPageState extends State<GovernmentOfficialLoginPag
                           fontWeight: FontWeight.normal,
                         ),
                         items: const [
-                          DropdownMenuItem(value: 'local_worker', child: Text('Local Worker')), // Updated value
+                          DropdownMenuItem(value: 'local_worker', child: Text('Mitanin')), // Updated label
                           DropdownMenuItem(value: 'official', child: Text('Official')), // Updated value
                         ],
                         onChanged: (String? newValue) {
@@ -256,23 +257,18 @@ class _GovernmentOfficialLoginPageState extends State<GovernmentOfficialLoginPag
                             ),
                           );
                         } else if (_selectedRoleOption == 'official') { // Check if 'official' is selected
-                          // Existing login logic for Government Official
-                          debugPrint('Government Official Username: ${_usernameController.text}');
-                          debugPrint('Government Official Password: ${_passwordController.text}');
-                          debugPrint('Selected Role Option: $_selectedRoleOption');
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text('Attempting Government Official login for: ${_usernameController.text}'),
-                              duration: const Duration(seconds: 2),
+                          // Navigate to AdhikariDashboardPage if 'Official' is selected
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const AdhikariDashboardPage(),
                             ),
                           );
-                          // In a real app, you'd add actual authentication here
-                          // and then navigate to the Government Official's dashboard.
                         } else {
                           // If no option is selected, prompt the user
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                              content: Text('Please select a role option (Local Worker or Official).'),
+                              content: Text('Please select a role option (Mitanin or Official).'),
                               duration: Duration(seconds: 2),
                             ),
                           );

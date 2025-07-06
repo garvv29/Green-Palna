@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'nursedash.dart';
 
 class HealthWorkerLoginPage extends StatefulWidget {
   const HealthWorkerLoginPage({super.key});
@@ -197,10 +198,10 @@ class _HealthWorkerLoginPageState extends State<HealthWorkerLoginPage> {
                       onPressed: () {
                         debugPrint('Health Worker Username: ${_usernameController.text}');
                         debugPrint('Health Worker Password: ${_passwordController.text}');
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('Attempting Health Worker login for: ${_usernameController.text}'),
-                            duration: const Duration(seconds: 2),
+                        // Navigate to nurse dashboard
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => const DashboardScreen(),
                           ),
                         );
                       },

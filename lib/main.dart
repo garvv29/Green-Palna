@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter/rendering.dart'; // Uncomment for visual debugging
 
-import 'package:gp1/screens/welcome_screen.dart'; // Import WelcomeScreen
+import 'package:gp1/screens/splash_screen.dart'; // Import SplashScreen
 
 void main() {
   // debugPaintSizeEnabled = true; // Uncomment for visual debugging
@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
           contentPadding: const EdgeInsets.all(16), // p-4
         ),
       ),
-      home: const WelcomeScreen(), // Set WelcomeScreen as the initial screen
+      home: const SplashScreen(), // Set SplashScreen as the initial screen
     );
   }
 }

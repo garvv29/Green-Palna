@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'mother_dash.dart';
 
 class MotherLoginPage extends StatefulWidget {
   const MotherLoginPage({super.key});
@@ -197,11 +198,8 @@ class _MotherLoginPageState extends State<MotherLoginPage> {
                       onPressed: () {
                         debugPrint('Mother Username: ${_usernameController.text}');
                         debugPrint('Mother Password: ${_passwordController.text}');
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('Attempting Mother login for: ${_usernameController.text}'),
-                            duration: const Duration(seconds: 2),
-                          ),
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) => const MotherDashboard()),
                         );
                       },
                       style: ElevatedButton.styleFrom(
@@ -226,33 +224,7 @@ class _MotherLoginPageState extends State<MotherLoginPage> {
                   ),
                 ),
 
-                // "New Mother? Register"
-                Align(
-                  alignment: Alignment.center,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 20),
-                    child: GestureDetector(
-                      onTap: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Mother Registration functionality not implemented.'),
-                            duration: Duration(seconds: 1),
-                          ),
-                        );
-                      },
-                      child: Text(
-                        'New Mother? Register',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: const Color(0xFF629155),
-                          fontSize: 14,
-                          fontWeight: FontWeight.normal,
-                          decoration: TextDecoration.underline,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+
                 const SizedBox(height: 20),
               ],
             ),

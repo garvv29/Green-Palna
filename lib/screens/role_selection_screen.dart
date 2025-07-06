@@ -12,29 +12,31 @@ class RoleSelectionScreen extends StatefulWidget {
 }
 
 class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
-  String? _selectedRole = 'Mother'; // Initial selected role
+  String? _selectedRole = null; // No initial selection
 
   // Define the new green color for consistency, as per your latest instruction
-  static const Color _primaryGreen = Color(0xFF50D22C);
+  static const Color _primaryGreen = Color(0xFF34A853);
 
   @override
   Widget build(BuildContext context) {
+    final roles = [
+      {'label': 'Mother', 'icon': Icons.pregnant_woman},
+      {'label': 'Health Worker', 'icon': Icons.medical_services},
+      {'label': 'Government Official', 'icon': Icons.account_balance},
+      {'label': 'Admin', 'icon': Icons.admin_panel_settings},
+    ];
     return Scaffold(
       backgroundColor: const Color(0xFFF9FBF9),
       appBar: AppBar(
         backgroundColor: const Color(0xFFF9FBF9),
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Color(0xFF121810), size: 28),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
+        automaticallyImplyLeading: false,
         title: Text(
-          'Green Cradle Initiative',
+          'Green Palna',
           style: TextStyle(
             color: const Color(0xFF121810),
-            fontSize: 20,
+            fontSize: MediaQuery.of(context).size.width * 0.06,
             fontWeight: FontWeight.bold,
-            letterSpacing: -0.015 * 20,
           ),
         ),
         centerTitle: true,
@@ -42,48 +44,57 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            // "Select Your Role" Title
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 20, 16, 20), // px-4 pb-3 pt-5 from HTML, adjusted
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
-                child: Text(
-                  'Select Your Role', // text-[#121810] tracking-light text-[28px] font-bold leading-tight
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: const Color(0xFF121810),
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    height: 1.2,
-                    letterSpacing: -0.025 * 28,
-                  ),
+              padding: EdgeInsets.fromLTRB(
+                MediaQuery.of(context).size.width * 0.04,
+                MediaQuery.of(context).size.height * 0.04,
+                MediaQuery.of(context).size.width * 0.04,
+                MediaQuery.of(context).size.height * 0.03,
+              ),
+              child: Text(
+                'Select Your Role',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: const Color(0xFF121810),
+                  fontSize: MediaQuery.of(context).size.width * 0.08,
+                  fontWeight: FontWeight.bold,
+                  height: 1.2,
                 ),
               ),
             ),
-            // Role Selection Options (using Wrap for flex-wrap behavior)
             Padding(
-              padding: const EdgeInsets.all(16.0), // p-4 from HTML, applied to padding
-              child: Wrap(
-                spacing: 12.0, // gap-3 from HTML, adjusted to 12.0 for better spacing
-                runSpacing: 12.0, // gap-3 from HTML, adjusted for vertical spacing
+              padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.04),
+              child: Column(
                 children: [
-                  _buildRoleChip('Mother', context),
-                  _buildRoleChip('Health Worker', context),
-                  _buildRoleChip('Government Official', context),
-                  _buildRoleChip('Admin', context),
+                  Row(
+                    children: [
+                      Expanded(child: _buildRoleCard(roles[0]['label'] as String, roles[0]['icon'] as IconData, context)),
+                      SizedBox(width: MediaQuery.of(context).size.width * 0.03),
+                      Expanded(child: _buildRoleCard(roles[1]['label'] as String, roles[1]['icon'] as IconData, context)),
+                    ],
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                  Row(
+                    children: [
+                      Expanded(child: _buildRoleCard(roles[2]['label'] as String, roles[2]['icon'] as IconData, context)),
+                      SizedBox(width: MediaQuery.of(context).size.width * 0.03),
+                      Expanded(child: _buildRoleCard(roles[3]['label'] as String, roles[3]['icon'] as IconData, context)),
+                    ],
+                  ),
                 ],
               ),
             ),
-            const Spacer(), // Pushes content to the top, button to the bottom
-
-            // Continue Button
+            const Spacer(),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12), // px-4 py-3
+              padding: EdgeInsets.symmetric(
+                horizontal: MediaQuery.of(context).size.width * 0.08,
+                vertical: MediaQuery.of(context).size.height * 0.02,
+              ),
               child: SizedBox(
-                height: 48, // h-12
-                width: double.infinity, // flex-1
+                height: MediaQuery.of(context).size.height * 0.07,
+                width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: _selectedRole == null ? null : () {
                     if (_selectedRole == 'Mother') {
                       Navigator.push(
                         context,
@@ -108,48 +119,38 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
                         MaterialPageRoute(
                             builder: (context) => const AdminLoginPage()),
                       );
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Please select a role to continue.'),
-                          duration: const Duration(seconds: 2),
-                        ),
-                      );
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: _primaryGreen, // bg-[#8cd279] in HTML, replaced with _primaryGreen
-                    foregroundColor: const Color(0xFF121810),
+                    backgroundColor: _selectedRole == null ? const Color(0xFFE8F2EC) : _primaryGreen,
+                    foregroundColor: _selectedRole == null ? const Color(0xFF6B7A6B) : Colors.white,
+                    disabledBackgroundColor: const Color(0xFFE8F2EC),
+                    disabledForegroundColor: const Color(0xFF6B7A6B),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(999), // rounded-full
+                      borderRadius: BorderRadius.circular(999),
                     ),
-                    padding: const EdgeInsets.symmetric(horizontal: 20), // px-5
-                    elevation: 0,
+                    padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.05),
+                    elevation: _selectedRole == null ? 0 : 2,
                   ),
-                  child: const Text(
+                  child: Text(
                     'Continue',
                     style: TextStyle(
-                      fontSize: 16, // text-base
+                      fontSize: MediaQuery.of(context).size.width * 0.045,
                       fontWeight: FontWeight.bold,
                       height: 1.5,
-                      letterSpacing: 0.015 * 16,
                     ),
                   ),
                 ),
               ),
             ),
-            // Bottom Spacer
-            Container(
-              height: 20, // h-5
-              color: const Color(0xFFF9FBF9),
-            ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildRoleChip(String role, BuildContext context) {
+  Widget _buildRoleCard(String role, IconData icon, BuildContext context) {
     final bool isSelected = _selectedRole == role;
     return GestureDetector(
       onTap: () {
@@ -158,27 +159,46 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
         });
       },
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200), // For smooth border transition
-        height: 60, // Increased from 44 to 60eased from 44 to 60
-        padding: isSelected
-            ? const EdgeInsets.symmetric(horizontal: 24.0) // Increased horizontal padding
-            : const EdgeInsets.symmetric(horizontal: 28.0),
+        duration: const Duration(milliseconds: 200),
+        height: MediaQuery.of(context).size.height * 0.25,
+        margin: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.01),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20), // Increased from 12 to 20from 12 to 20
+          color: isSelected ? _primaryGreen : Colors.white,
+          borderRadius: BorderRadius.circular(32),
           border: Border.all(
             color: isSelected ? _primaryGreen : const Color(0xFFD7E2D4),
-            width: isSelected ? 3.0 : 1.0,
+            width: isSelected ? 3.0 : 1.5,
           ),
+          boxShadow: [
+            BoxShadow(
+              color: isSelected ? _primaryGreen.withOpacity(0.25) : const Color(0xFF000000).withOpacity(0.08),
+              blurRadius: isSelected ? 16 : 8,
+              offset: const Offset(0, 4),
+            ),
+          ],
         ),
-        alignment: Alignment.center,
-        child: Text(
-          role,
-          style: const TextStyle(
-            color: Color(0xFF121810),
-            fontSize: 18, // Increased from 14 to 18ed from 14 to 18
-            fontWeight: FontWeight.w600, // Slightly bolderlder
-            height: 1.5,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                icon, 
+                size: MediaQuery.of(context).size.width * 0.18, 
+                color: isSelected ? Colors.white : _primaryGreen
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+              Text(
+                role,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: isSelected ? Colors.white : const Color(0xFF121810),
+                  fontSize: MediaQuery.of(context).size.width * 0.07,
+                  fontWeight: FontWeight.w600,
+                  height: 1.1,
+                ),
+              ),
+            ],
           ),
         ),
       ),

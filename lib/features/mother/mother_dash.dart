@@ -9,20 +9,20 @@ class NotificationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<Map<String, String>> notifications = [
       {
-        'title': 'Guava is Due Today',
-        'body': 'Upload a photo for Guava. It is due today!'
+        'title': 'Amrood is Due Today',
+        'body': 'Upload a photo for Amrood. It is due today!'
       },
       {
-        'title': 'Drumsticks Due in 1 day',
-        'body': 'Drumsticks sapling needs a photo upload in 1 day.'
+        'title': 'Munga Due in 1 day',
+        'body': 'Munga sapling needs a photo upload in 1 day.'
       },
       {
         'title': 'Amla Due in 3 days',
         'body': 'Don\'t forget to upload a photo for Amla.'
       },
       {
-        'title': 'Papaya Due this week',
-        'body': 'Papaya sapling is due for a photo upload this week.'
+        'title': 'Papita Due this week',
+        'body': 'Papita sapling is due for a photo upload this week.'
       },
     ];
 
@@ -31,14 +31,11 @@ class NotificationPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.green, size: 28),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
+
         title: const Text(
           'Notifications',
           style: TextStyle(
-            color: Colors.green,
+            color: Colors.black,
             fontSize: 20,
             fontWeight: FontWeight.bold,
             letterSpacing: -0.015 * 20,
@@ -65,21 +62,21 @@ class NotificationPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 padding: const EdgeInsets.all(8),
-                child: const Icon(Icons.notifications_active, color: Colors.red, size: 28),
+                child: const Icon(Icons.notifications_active, color: Colors.black, size: 28),
               ),
               title: Text(
                 notif['title']!,
                 style: GoogleFonts.poppins(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
-                  color: Colors.green,
+                  color: Colors.black,
                 ),
               ),
               subtitle: Text(
                 notif['body']!,
                 style: GoogleFonts.poppins(
                   fontSize: 14,
-                  color: Colors.green,
+                  color: Colors.black,
                 ),
               ),
             ),
@@ -102,7 +99,7 @@ class _MotherDashboardState extends State<MotherDashboard> {
   String _sortBy = 'Due Date';
   List<Map<String, dynamic>> allSaplings = [
     {
-      'name': 'Mango',
+      'name': 'Aam',
       'days': '15 days ago',
       'status': 'Safe',
       'progress': 75,
@@ -110,7 +107,7 @@ class _MotherDashboardState extends State<MotherDashboard> {
       'color': Colors.green
     },
     {
-      'name': 'Guava',
+      'name': 'Amrood',
       'days': '7 days ago',
       'status': 'Due Today',
       'progress': 30,
@@ -118,7 +115,7 @@ class _MotherDashboardState extends State<MotherDashboard> {
       'color': Colors.red
     },
     {
-      'name': 'Drumsticks',
+      'name': 'Munga',
       'days': '10 days ago',
       'status': 'Due in 1 day',
       'progress': 50,
@@ -134,7 +131,7 @@ class _MotherDashboardState extends State<MotherDashboard> {
       'color': Colors.red
     },
     {
-      'name': 'Papaya',
+      'name': 'Papita',
       'days': '5 days ago',
       'status': 'Due this week',
       'progress': 10,
@@ -177,18 +174,12 @@ class _MotherDashboardState extends State<MotherDashboard> {
         automaticallyImplyLeading: false,
         title: Row(
           children: [
-            IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.green, size: 28),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
             Expanded(
               child: Text(
                 _getAppBarTitle(_selectedIndex),
                 textAlign: TextAlign.center,
                 style: const TextStyle(
-                  color: Colors.green,
+                  color: Colors.black,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   letterSpacing: -0.015 * 20,
@@ -196,7 +187,7 @@ class _MotherDashboardState extends State<MotherDashboard> {
               ),
             ),
           IconButton(
-              icon: const Icon(Icons.notifications, color: Colors.green, size: 28),
+              icon: const Icon(Icons.notifications, color: Colors.black, size: 28),
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => const NotificationPage()),
@@ -222,7 +213,7 @@ class _MotherDashboardState extends State<MotherDashboard> {
                 CircleAvatar(
                   radius: 40,
                   backgroundImage: NetworkImage(
-                    'https://lh3.googleusercontent.com/aida-public/AB6AXuDqKifDHhT7VaFSFrct2kzKj5LeGMWOjhEqpWxNiHB65S8W0dyCQLNpzsFjcww1dpVa4JRf7wuv_NIPPrEDUNiR-GQ03CyntcugadJBhT4VgdX3SvBxmIPXQlhyruz5c3Nuv_KwPS1J_RIS9Fu2w48y9BJ_qDgyJYLcLnGg52nBh2HYUY0QXzBBG6Sgtui0GARbLfOQcIPz7262H7W6vobiGW0-9c_lHTz2DcVDjurq9ti7TfuNOXe4B-b1KZhsmaNatdhGaAwg_-yp',
+                    'https://cdn.discordapp.com/attachments/1391128695426781295/1391367345686970449/image_2025-07-05_130243854-removebg-preview.png?ex=686ba351&is=686a51d1&hm=a427b1ea1a423af026d070a010973affb8bfba22ca6e6913ec97b0bb36a72eec&',
                   ),
                 ),
                 const SizedBox(width: 20),
@@ -273,7 +264,7 @@ class _MotherDashboardState extends State<MotherDashboard> {
                   style: GoogleFonts.poppins(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          color: Colors.green,
+                          color: Colors.black,
                         ),
                       ),
               DropdownButton<String>(
@@ -286,8 +277,8 @@ class _MotherDashboardState extends State<MotherDashboard> {
                 onChanged: _sortSaplings,
                 underline: Container(),
                         dropdownColor: Colors.white,
-                        style: const TextStyle(color: Colors.green),
-                        icon: const Icon(Icons.arrow_drop_down, color: Colors.green),
+                        style: const TextStyle(color: Colors.black),
+                        icon: const Icon(Icons.arrow_drop_down, color: Colors.black),
               )
             ],
           ),
@@ -302,7 +293,7 @@ class _MotherDashboardState extends State<MotherDashboard> {
               style: GoogleFonts.poppins(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: Colors.green,
+                      color: Colors.black,
                     ),
                   ),
                 ),
@@ -322,7 +313,7 @@ class _MotherDashboardState extends State<MotherDashboard> {
                     child: Text(
                       'Assistance',
                       style: const TextStyle(
-                        color: Colors.green,
+                        color: Colors.black,
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
                         letterSpacing: -0.015 * 22,
@@ -347,7 +338,7 @@ class _MotherDashboardState extends State<MotherDashboard> {
                     child: Text(
                       'Profile',
                       style: const TextStyle(
-                        color: Colors.green,
+                        color: Colors.black,
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
                         letterSpacing: -0.015 * 22,
@@ -363,7 +354,7 @@ class _MotherDashboardState extends State<MotherDashboard> {
                           child: CircleAvatar(
                             radius: 54,
                             backgroundImage: NetworkImage(
-                              'https://lh3.googleusercontent.com/aida-public/AB6AXuDqKifDHhT7VaFSFrct2kzKj5LeGMWOjhEqpWxNiHB65S8W0dyCQLNpzsFjcww1dpVa4JRf7wuv_NIPPrEDUNiR-GQ03CyntcugadJBhT4VgdX3SvBxmIPXQlhyruz5c3Nuv_KwPS1J_RIS9Fu2w48y9BJ_qDgyJYLcLnGg52nBh2HYUY0QXzBBG6Sgtui0GARbLfOQcIPz7262H7W6vobiGW0-9c_lHTz2DcVDjurq9ti7TfuNOXe4B-b1KZhsmaNatdhGaAwg_-yp',
+                              'https://cdn.discordapp.com/attachments/1391128695426781295/1391367345686970449/image_2025-07-05_130243854-removebg-preview.png?ex=686ba351&is=686a51d1&hm=a427b1ea1a423af026d070a010973affb8bfba22ca6e6913ec97b0bb36a72eec&',
                             ),
                           ),
                         ),
@@ -433,12 +424,9 @@ class _MotherDashboardState extends State<MotherDashboard> {
           ),
         ],
       ),
-      bottomNavigationBar: Container(
+            bottomNavigationBar: Container(
         decoration: const BoxDecoration(
           color: Colors.white,
-          border: Border(
-            top: BorderSide(color: Colors.green, width: 1.0),
-          ),
         ),
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
         child: Row(
@@ -447,21 +435,21 @@ class _MotherDashboardState extends State<MotherDashboard> {
             _buildBottomNavItem(
               icon: Icons.home_filled,
               label: 'Home',
-              color: _selectedIndex == 0 ? Colors.green : Colors.green.withValues(alpha: 0.5),
+              color: _selectedIndex == 0 ? Colors.black : Colors.black.withValues(alpha: 0.3),
               isActive: _selectedIndex == 0,
               onTap: () => setState(() => _selectedIndex = 0),
             ),
             _buildBottomNavItem(
               icon: Icons.help,
               label: 'Assistance',
-              color: _selectedIndex == 1 ? Colors.green : Colors.green.withValues(alpha: 0.5),
+              color: _selectedIndex == 1 ? Colors.black : Colors.black.withValues(alpha: 0.3),
               isActive: _selectedIndex == 1,
               onTap: () => setState(() => _selectedIndex = 1),
             ),
             _buildBottomNavItem(
               icon: Icons.person,
               label: 'Profile',
-              color: _selectedIndex == 2 ? Colors.green : Colors.green.withValues(alpha: 0.5),
+              color: _selectedIndex == 2 ? Colors.black : Colors.black.withValues(alpha: 0.3),
               isActive: _selectedIndex == 2,
               onTap: () => setState(() => _selectedIndex = 2),
             ),
@@ -649,7 +637,7 @@ class _MotherDashboardState extends State<MotherDashboard> {
                     child: const Text(
                       'Message Now',
                       style: TextStyle(
-                        color: Colors.green,
+                        color: Colors.black,
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
                       ),
@@ -869,8 +857,8 @@ class SaplingCard extends StatelessWidget {
               children: [
                 TextButton.icon(
                   onPressed: () {},
-                    icon: const Icon(Icons.photo_library, color: Colors.green),
-                    label: const Text('View Photos', style: TextStyle(color: Colors.green)),
+                    icon: const Icon(Icons.photo_library, color: Color(0xFF34A853)),
+                    label: const Text('View Photos', style: TextStyle(color: Color(0xFF34A853))),
                 ),
                 ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(

@@ -28,10 +28,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
       appBar: AppBar(
         backgroundColor: const Color(0xFFF9FBF9),
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Color(0xFF111A0F), size: 28),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
+        automaticallyImplyLeading: false,
         title: Text(
           'Green Cradle Initiative', // From HTML header
           style: TextStyle(
@@ -160,7 +157,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF50D22C), // Updated green color
+                        backgroundColor: const Color(0xFF34A853), // Updated green color
                         foregroundColor: const Color(0xFF111A0F),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(999),
@@ -200,10 +197,10 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
-                        foregroundColor: const Color(0xFF50D22C),
+                        foregroundColor: const Color(0xFF34A853),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(999),
-                          side: const BorderSide(color: Color(0xFF50D22C), width: 2),
+                          side: const BorderSide(color: Color(0xFF34A853), width: 2),
                         ),
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         elevation: 0,

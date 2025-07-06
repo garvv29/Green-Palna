@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:gp1/features/government_official/local_worker/local_worker_dashboard_page.dart'; // Import the LocalWorkerDashboardPage
-import 'package:gp1/features/government_official/adhikari/adhikari_dash.dart'; // Import the AdhikariDashboardPage
-import '../idk/newsystem.dart';
+import 'hospital.dart';
 
 class GovernmentOfficialLoginPage extends StatefulWidget {
   const GovernmentOfficialLoginPage({super.key});
 
   @override
-  State<GovernmentOfficialLoginPage> createState() => _GovernmentOfficialLoginPageState();
+  State<GovernmentOfficialLoginPage> createState() =>
+      _GovernmentOfficialLoginPageState();
 }
 
-class _GovernmentOfficialLoginPageState extends State<GovernmentOfficialLoginPage> {
+class _GovernmentOfficialLoginPageState
+    extends State<GovernmentOfficialLoginPage> {
+  bool get _isLoginEnabled =>
+      _usernameController.text.trim().isNotEmpty &&
+      _passwordController.text.trim().isNotEmpty;
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   // Using more descriptive string values for clarity
@@ -31,317 +35,319 @@ class _GovernmentOfficialLoginPageState extends State<GovernmentOfficialLoginPag
       appBar: AppBar(
         backgroundColor: const Color(0xFFF9FBF9),
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Color(0xFF121810), size: 28), // text-[#121810]
-          onPressed: () => Navigator.of(context).pop(),
-        ),
+        automaticallyImplyLeading: false,
         title: Text(
-          'Green Cradle Initiative',
+          'Green Palna',
           style: TextStyle(
             color: const Color(0xFF121810), // text-[#121810]
-            fontSize: 20, // text-lg, adjusted for AppBar consistency
+            fontSize: MediaQuery.of(context).size.width * 0.05,
             fontWeight: FontWeight.bold,
-            letterSpacing: -0.015 * 20,
           ),
         ),
         centerTitle: true,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: IntrinsicHeight(
-            child: Column(
-              children: [
-                // "Logging in as Government Official"
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 20, 16, 12), // px-4 pb-2 pt-5
-                  child: Text(
-                    'Logging in as Government Official',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: const Color(0xFF121810), // text-[#121810]
-                      fontSize: 24, // text-2xl
-                      fontWeight: FontWeight.bold, // font-bold
-                      height: 1.25, // leading-tight
-                      letterSpacing: -0.025 * 24, // tracking-light
+          padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.04),
+          child: StatefulBuilder(
+            builder: (context, setStateSB) {
+              return Column(
+                children: [
+                  // "Logging in as Government Official"
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(
+                      MediaQuery.of(context).size.width * 0.04,
+                      MediaQuery.of(context).size.height * 0.02,
+                      MediaQuery.of(context).size.width * 0.04,
+                      MediaQuery.of(context).size.height * 0.01,
+                    ),
+                    child: Text(
+                      'Logging in as Government Official',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: const Color(0xFF121810),
+                        fontSize: MediaQuery.of(context).size.width * 0.06, // Responsive font size
+                        fontWeight: FontWeight.bold,
+                        height: 1.2,
+                      ),
                     ),
                   ),
-                ),
-                // "Official Login"
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 20), // pb-3 pt-5 px-4
-                  child: Text(
-                    'Official Login',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: const Color(0xFF121810), // text-[#121810]
-                      fontSize: 26, // text-[22px], increased slightly for better visual hierarchy
-                      fontWeight: FontWeight.bold, // font-bold
-                      height: 1.25, // leading-tight
-                      letterSpacing: -0.015 * 26, // tracking-[-0.015em]
+                  // "Official Login"
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(
+                      MediaQuery.of(context).size.width * 0.04,
+                      MediaQuery.of(context).size.height * 0.01,
+                      MediaQuery.of(context).size.width * 0.04,
+                      MediaQuery.of(context).size.height * 0.02,
+                    ),
+                    child: Text(
+                      'Official Login',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: const Color(0xFF121810),
+                        fontSize: MediaQuery.of(context).size.width * 0.065, // Responsive font size
+                        fontWeight: FontWeight.bold,
+                        height: 1.2,
+                      ),
                     ),
                   ),
-                ),
-
-                const SizedBox(height: 20), // Spacing before inputs
-
-                // Username Input
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: TextField(
-                    controller: _usernameController,
-                    decoration: InputDecoration(
-                      hintText: 'Username',
-                      hintStyle: const TextStyle(color: Color(0xFF668A5C)), // placeholder:text-[#668a5c]
-                      filled: true,
-                      fillColor: const Color(0xFFEBF1EA), // bg-[#ebf1ea]
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide.none,
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide.none,
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide.none,
-                      ),
-                      contentPadding: const EdgeInsets.all(16), // p-4
-                    ),
-                    style: const TextStyle(
-                      color: Color(0xFF121810), // text-[#121810]
-                      fontSize: 16, // text-base
-                      fontWeight: FontWeight.normal, // font-normal
-                    ),
-                    cursorColor: const Color(0xFF668A5C), // Placeholder color for cursor
-                  ),
-                ),
-                const SizedBox(height: 16), // Gap between inputs
-
-                // Password Input with Visibility Toggle
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: TextField(
-                    controller: _passwordController,
-                    obscureText: !_isPasswordVisible, // Use the state variable
-                    decoration: InputDecoration(
-                      hintText: 'Password',
-                      hintStyle: const TextStyle(color: Color(0xFF668A5C)), // placeholder:text-[#668a5c]
-                      filled: true,
-                      fillColor: const Color(0xFFEBF1EA), // bg-[#ebf1ea]
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide.none,
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide.none,
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide.none,
-                      ),
-                      contentPadding: const EdgeInsets.all(16), // p-4
-                      suffixIcon: IconButton( // Add suffixIcon for toggle
-                        icon: Icon(
-                          _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
-                          color: const Color(0xFF668A5C), // Match placeholder color
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.02), // Responsive spacing
+                  // Username Input
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.01),
+                    child: TextField(
+                      controller: _usernameController,
+                      onChanged: (_) => setStateSB(() {}),
+                      decoration: InputDecoration(
+                        hintText: 'Username',
+                        hintStyle: const TextStyle(
+                          color: Color(0xFF668A5C),
                         ),
-                        onPressed: () {
-                          setState(() {
-                            _isPasswordVisible = !_isPasswordVisible; // Toggle visibility
-                          });
-                        },
+                        filled: true,
+                        fillColor: const Color(0xFFEBF1EA),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none,
+                        ),
+                        contentPadding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.04),
                       ),
+                      style: TextStyle(
+                        color: const Color(0xFF121810),
+                        fontSize: MediaQuery.of(context).size.width * 0.04,
+                        fontWeight: FontWeight.normal,
+                      ),
+                      cursorColor: const Color(0xFF668A5C),
                     ),
-                    style: const TextStyle(
-                      color: Color(0xFF121810), // text-[#121810]
-                      fontSize: 16, // text-base
-                      fontWeight: FontWeight.normal, // font-normal
-                    ),
-                    cursorColor: const Color(0xFF668A5C), // Placeholder color for cursor
                   ),
-                ),
-                const SizedBox(height: 16), // Gap before dropdown
-
-                // Select Role Dropdown
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: Container(
-                    height: 56, // h-14
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFEBF1EA), // bg-[#ebf1ea]
-                      borderRadius: BorderRadius.circular(12), // rounded-xl
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.015), // Responsive gap
+                  // Password Input with Visibility Toggle
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.01),
+                    child: TextField(
+                      controller: _passwordController,
+                      obscureText: !_isPasswordVisible,
+                      onChanged: (_) => setStateSB(() {}),
+                      decoration: InputDecoration(
+                        hintText: 'Password',
+                        hintStyle: const TextStyle(
+                          color: Color(0xFF668A5C),
+                        ),
+                        filled: true,
+                        fillColor: const Color(0xFFEBF1EA),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none,
+                        ),
+                        contentPadding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.04),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _isPasswordVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: Colors.black,
+                          ),
+                          onPressed: () {
+                            setStateSB(() {
+                              _isPasswordVisible = !_isPasswordVisible;
+                            });
+                          },
+                        ),
+                      ),
+                      style: TextStyle(
+                        color: const Color(0xFF121810),
+                        fontSize: MediaQuery.of(context).size.width * 0.04,
+                        fontWeight: FontWeight.normal,
+                      ),
+                      cursorColor: const Color(0xFF668A5C),
                     ),
-                    padding: const EdgeInsets.symmetric(horizontal: 16), // p-4
-                    child: DropdownButtonHideUnderline( // Hides the default underline
-                      child: DropdownButton<String>(
-                        value: _selectedRoleOption,
-                        hint: Text(
-                          'Select Role',
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.015), // Responsive gap
+                  // Select Role Dropdown
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.01),
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.07, // Responsive height
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFEBF1EA),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: MediaQuery.of(context).size.width * 0.04,
+                      ),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                          value: _selectedRoleOption,
+                          hint: Text(
+                            'Select Role',
+                            style: TextStyle(
+                              color: const Color(0xFF668A5C),
+                              fontSize: MediaQuery.of(context).size.width * 0.04,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                          icon: Icon(
+                            Icons.arrow_drop_down,
+                            color: const Color(0xFF668A5C),
+                            size: MediaQuery.of(context).size.width * 0.07,
+                          ),
+                          isExpanded: true,
+                          dropdownColor: const Color(0xFFEBF1EA),
                           style: TextStyle(
-                            color: const Color(0xFF668A5C), // placeholder:text-[#668a5c]
-                            fontSize: 16,
+                            color: const Color(0xFF121810),
+                            fontSize: MediaQuery.of(context).size.width * 0.04,
                             fontWeight: FontWeight.normal,
                           ),
-                        ),
-                        icon: Icon(
-                          Icons.arrow_drop_down, // Default dropdown arrow icon
-                          color: const Color(0xFF668A5C), // From --select-button-svg fill
-                          size: 28, // Adjusted size to be prominent
-                        ),
-                        isExpanded: true, // Make dropdown take full width
-                        dropdownColor: const Color(0xFFEBF1EA), // Background color of the dropdown menu
-                        style: const TextStyle(
-                          color: Color(0xFF121810), // text-[#121810]
-                          fontSize: 16,
-                          fontWeight: FontWeight.normal,
-                        ),
-                        items: const [
-                          DropdownMenuItem(value: 'local_worker', child: Text('Local Worker')), // Updated label
-                          DropdownMenuItem(value: 'official', child: Text('Official')), // Updated value
-                        ],
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            _selectedRoleOption = newValue;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                ),
-
-                // Forgot Password?
-                Align(
-                  alignment: Alignment.center, // text-center in HTML
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 20), // pb-3 pt-1 px-4
-                    child: GestureDetector(
-                      onTap: () {
-                        // Handle forgot password tap
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Forgot Password? functionality not implemented.'),
-                            duration: Duration(seconds: 1),
-                          ),
-                        );
-                      },
-                      child: Text(
-                        'Forgot Password?',
-                        style: TextStyle(
-                          color: const Color(0xFF668A5C), // text-[#668a5c]
-                          fontSize: 14, // text-sm
-                          fontWeight: FontWeight.normal, // font-normal
-                          decoration: TextDecoration.underline,
+                          items: const [
+                            DropdownMenuItem(
+                              value: 'local_worker',
+                              child: Text('Local Worker'),
+                            ),
+                            DropdownMenuItem(
+                              value: 'official',
+                              child: Text('Official'),
+                            ),
+                            DropdownMenuItem(
+                              value: 'hospital',
+                              child: Text('Hospital'),
+                            ),
+                          ],
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              _selectedRoleOption = newValue;
+                            });
+                          },
                         ),
                       ),
                     ),
                   ),
-                ),
-                const Spacer(), // Pushes content to the top, buttons to the bottom
-
-                // Login Button
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10), // Adjusted vertical padding
-                  child: SizedBox(
-                    height: 48, // h-12
-                    width: double.infinity, // flex-1
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (_selectedRoleOption == 'local_worker') { // Check if 'local_worker' is selected
-                          // Navigate to LocalWorkerDashboardPage if 'Local Worker' is selected
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const LocalWorkerDashboardPage(),
-                            ),
-                          );
-                        } else if (_selectedRoleOption == 'official') { // Check if 'official' is selected
-                          // Navigate to AdhikariDashboardPage if 'Official' is selected
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const AdhikariDashboardPage(),
-                            ),
-                          );
-                        } else {
-                          // If no option is selected, prompt the user
+                  // Forgot Password?
+                  Align(
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(
+                        MediaQuery.of(context).size.width * 0.04,
+                        MediaQuery.of(context).size.height * 0.01,
+                        MediaQuery.of(context).size.width * 0.04,
+                        MediaQuery.of(context).size.height * 0.02,
+                      ),
+                      child: GestureDetector(
+                        onTap: () {
                           ScaffoldMessenger.of(context).showSnackBar(
-                                                      const SnackBar(
-                            content: Text('Please select a role option (Local Worker or Official).'),
-                            duration: Duration(seconds: 2),
-                          ),
-                          );
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF50D22C), // Updated green color from 0xFF8CD279
-                        foregroundColor: const Color(0xFF121810), // text-[#121810]
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(999), // rounded-full
-                        ),
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        elevation: 0,
-                      ),
-                      child: const Text(
-                        'Login',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          height: 1.5,
-                          letterSpacing: 0.015 * 16,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-
-                // New User Registration Button
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                  child: SizedBox(
-                    height: 48,
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const LocalWorkerProfileFormScreen(
-                              headerTitle: 'Government Official Registration',
+                            const SnackBar(
+                              content: Text(
+                                'Forgot Password? functionality not implemented.',
+                              ),
+                              duration: Duration(seconds: 1),
                             ),
+                          );
+                        },
+                        child: Text(
+                          'Forgot Password?',
+                          style: TextStyle(
+                            color: const Color(0xFF668A5C),
+                            fontSize: MediaQuery.of(context).size.width * 0.035,
+                            fontWeight: FontWeight.normal,
+                            decoration: TextDecoration.underline,
                           ),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        foregroundColor: const Color(0xFF50D22C),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(999),
-                          side: const BorderSide(color: Color(0xFF50D22C), width: 2),
-                        ),
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        elevation: 0,
-                      ),
-                      child: const Text(
-                        'New User? Register',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          height: 1.5,
-                          letterSpacing: 0.015 * 16,
                         ),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 20), // Equivalent to div class="h-5"
-              ],
-            ),
-          ),
-        ),
-      ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.05), // Responsive spacing
+                  // Login Button
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: MediaQuery.of(context).size.width * 0.04,
+                      vertical: MediaQuery.of(context).size.height * 0.01,
+                    ),
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.06, // Responsive height
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: _isLoginEnabled
+                            ? () {
+                                if (_selectedRoleOption == 'local_worker') {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const LocalWorkerDashboardPage(),
+                                    ),
+                                  );
+                                } else if (_selectedRoleOption == 'official') {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(
+                                        'Official dashboard not implemented.',
+                                      ),
+                                      duration: Duration(seconds: 2),
+                                    ),
+                                  );
+                                } else if (_selectedRoleOption == 'hospital') {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          HospitalDashboard(),
+                                    ),
+                                  );
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(
+                                        'Please select a role option (Local Worker, Official, or Hospital).',
+                                      ),
+                                      duration: Duration(seconds: 2),
+                                    ),
+                                  );
+                                }
+                              }
+                            : null,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF50D22C),
+                          foregroundColor: const Color(0xFF121810),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(999),
+                          ),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: MediaQuery.of(context).size.width * 0.05,
+                          ),
+                          elevation: 0,
+                        ),
+                        child: Text(
+                          'Login',
+                          style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.width * 0.04,
+                            fontWeight: FontWeight.bold,
+                            height: 1.5,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.02), // Responsive spacing
+                ],
+              );
+            },
+          ), // End of StatefulBuilder
+        ), // End of SingleChildScrollView
+      ), // End of SafeArea
     );
   }
 }

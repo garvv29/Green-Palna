@@ -126,7 +126,7 @@ class _AdhikariDashboardPageState extends State<AdhikariDashboardPage> {
                       value: '5,678',
                       icon: Icons.park_rounded,
                       gradient: const LinearGradient(
-                        colors: [Color(0xFF50D22C), Color(0xFF7BE495)],
+                        colors: [Color(0xFF34A853), Color(0xFF7BE495)],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
@@ -148,7 +148,7 @@ class _AdhikariDashboardPageState extends State<AdhikariDashboardPage> {
                       value: '1,234',
                       icon: Icons.park_rounded,
                       gradient: const LinearGradient(
-                        colors: [Color(0xFF50D22C), Color(0xFFB6FFCE)],
+                        colors: [Color(0xFF34A853), Color(0xFFB6FFCE)],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),

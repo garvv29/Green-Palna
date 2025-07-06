@@ -8,7 +8,8 @@ class LocalWorkerDashboardPage extends StatefulWidget {
   const LocalWorkerDashboardPage({super.key});
 
   @override
-  State<LocalWorkerDashboardPage> createState() => _LocalWorkerDashboardPageState();
+  State<LocalWorkerDashboardPage> createState() =>
+      _LocalWorkerDashboardPageState();
 }
 
 class _LocalWorkerDashboardPageState extends State<LocalWorkerDashboardPage> {
@@ -146,111 +147,107 @@ class _LocalWorkerDashboardPageState extends State<LocalWorkerDashboardPage> {
         backgroundColor: Colors.white,
         elevation: 0,
         automaticallyImplyLeading: false,
-        title: Row(
-          children: [
-            IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.black, size: 28),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
+        title: Text(
+          _getAppBarTitle(_selectedIndex),
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            letterSpacing: -0.015 * 20,
+          ),
+        ),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.notifications,
+              color: Colors.black,
+              size: 28,
             ),
-            Expanded(
-              child: Text(
-                _getAppBarTitle(_selectedIndex),
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: -0.015 * 20,
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const NotificationsPage(),
+                ),
+              );
+            },
+          ),
+          PopupMenuButton<String>(
+            icon: const Icon(Icons.more_vert, color: Colors.black, size: 28),
+            onSelected: (value) {
+              if (value == 'logout') {
+                // Handle logout
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('Logout'),
+                      content: const Text('Are you sure you want to logout?'),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: const Text('Cancel'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            // Navigate to login page or perform logout
+                            Navigator.of(
+                              context,
+                            ).pushNamedAndRemoveUntil('/', (route) => false);
+                          },
+                          child: const Text('Logout'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              } else if (value == 'help') {
+                // Handle help
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('Help'),
+                      content: const Text(
+                        'For any assistance, please contact the support team at support@greencradle.com',
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: const Text('OK'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }
+            },
+            itemBuilder: (BuildContext context) => [
+              const PopupMenuItem<String>(
+                value: 'logout',
+                child: Row(
+                  children: [
+                    Icon(Icons.logout, color: Colors.black),
+                    SizedBox(width: 8),
+                    Text('Logout'),
+                  ],
                 ),
               ),
-            ),
-            IconButton(
-              icon: const Icon(Icons.notifications, color: Colors.black, size: 28),
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const NotificationsPage(),
-                  ),
-                );
-              },
-            ),
-            PopupMenuButton<String>(
-              icon: const Icon(Icons.more_vert, color: Colors.black, size: 28),
-              onSelected: (value) {
-                if (value == 'logout') {
-                  // Handle logout
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text('Logout'),
-                        content: const Text('Are you sure you want to logout?'),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.of(context).pop(),
-                            child: const Text('Cancel'),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                              // Navigate to login page or perform logout
-                              Navigator.of(context).pushNamedAndRemoveUntil(
-                                '/',
-                                (route) => false,
-                              );
-                            },
-                            child: const Text('Logout'),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                } else if (value == 'help') {
-                  // Handle help
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text('Help'),
-                        content: const Text('For any assistance, please contact the support team at support@greencradle.com'),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.of(context).pop(),
-                            child: const Text('OK'),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                }
-              },
-              itemBuilder: (BuildContext context) => [
-                const PopupMenuItem<String>(
-                  value: 'logout',
-                  child: Row(
-                    children: [
-                      Icon(Icons.logout, color: Colors.black),
-                      SizedBox(width: 8),
-                      Text('Logout'),
-                    ],
-                  ),
+              const PopupMenuItem<String>(
+                value: 'help',
+                child: Row(
+                  children: [
+                    Icon(Icons.help_outline, color: Colors.black),
+                    SizedBox(width: 8),
+                    Text('Help'),
+                  ],
                 ),
-                const PopupMenuItem<String>(
-                  value: 'help',
-                  child: Row(
-                    children: [
-                      Icon(Icons.help_outline, color: Colors.black),
-                      SizedBox(width: 8),
-                      Text('Help'),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
+              ),
+            ],
+          ),
+        ],
       ),
       body: IndexedStack(
         index: _selectedIndex,
@@ -327,7 +324,9 @@ class _LocalWorkerDashboardPageState extends State<LocalWorkerDashboardPage> {
                         controller: searchController,
                         decoration: InputDecoration(
                           hintText: 'Search mother name...',
-                          hintStyle: GoogleFonts.poppins(color: Colors.black.withValues(alpha: 0.6)),
+                          hintStyle: GoogleFonts.poppins(
+                            color: Colors.black.withValues(alpha: 0.6),
+                          ),
                           prefixIcon: Icon(Icons.search, color: Colors.black),
                           contentPadding: const EdgeInsets.symmetric(
                             vertical: 12,
@@ -335,15 +334,22 @@ class _LocalWorkerDashboardPageState extends State<LocalWorkerDashboardPage> {
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide(color: Colors.black.withValues(alpha: 0.3)),
+                            borderSide: BorderSide(
+                              color: Colors.black.withValues(alpha: 0.3),
+                            ),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide(color: Colors.black.withValues(alpha: 0.3)),
+                            borderSide: BorderSide(
+                              color: Colors.black.withValues(alpha: 0.3),
+                            ),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide(color: Colors.black, width: 2),
+                            borderSide: BorderSide(
+                              color: Colors.black,
+                              width: 2,
+                            ),
                           ),
                           filled: true,
                           fillColor: Colors.black.withValues(alpha: 0.05),
@@ -358,13 +364,15 @@ class _LocalWorkerDashboardPageState extends State<LocalWorkerDashboardPage> {
                   ),
                 ),
                 // Upcoming Deadlines List
-                ...filteredTasks.map((task) => _buildTaskCard(
-                  task['name'] as String,
-                  task['deadline'] as String,
-                  task['completed'] as int,
-                  task['total'] as int,
-                  task['color'] as Color,
-                )),
+                ...filteredTasks.map(
+                  (task) => _buildTaskCard(
+                    task['name'] as String,
+                    task['deadline'] as String,
+                    task['completed'] as int,
+                    task['total'] as int,
+                    task['color'] as Color,
+                  ),
+                ),
                 const SizedBox(height: 28),
                 // New Mothers Section
                 Padding(
@@ -397,12 +405,7 @@ class _LocalWorkerDashboardPageState extends State<LocalWorkerDashboardPage> {
         ],
       ),
       bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          border: Border(
-            top: BorderSide(color: Colors.black, width: 1.0),
-          ),
-        ),
+        color: Colors.white,
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -410,21 +413,27 @@ class _LocalWorkerDashboardPageState extends State<LocalWorkerDashboardPage> {
             _buildBottomNavItem(
               icon: Icons.home_filled,
               label: 'Home',
-              color: _selectedIndex == 0 ? Colors.black : Colors.black.withValues(alpha: 0.5),
+              color: _selectedIndex == 0
+                  ? Colors.black
+                  : Colors.black.withOpacity(0.5),
               isActive: _selectedIndex == 0,
               onTap: () => setState(() => _selectedIndex = 0),
             ),
             _buildBottomNavItem(
               icon: Icons.groups,
               label: 'Assigned Mothers',
-              color: _selectedIndex == 1 ? Colors.black : Colors.black.withValues(alpha: 0.5),
+              color: _selectedIndex == 1
+                  ? Colors.black
+                  : Colors.black.withOpacity(0.5),
               isActive: _selectedIndex == 1,
               onTap: () => setState(() => _selectedIndex = 1),
             ),
             _buildBottomNavItem(
               icon: Icons.person,
               label: 'Profile',
-              color: _selectedIndex == 2 ? Colors.black : Colors.black.withValues(alpha: 0.5),
+              color: _selectedIndex == 2
+                  ? Colors.black
+                  : Colors.black.withOpacity(0.5),
               isActive: _selectedIndex == 2,
               onTap: () => setState(() => _selectedIndex = 2),
             ),
@@ -465,11 +474,7 @@ class _LocalWorkerDashboardPageState extends State<LocalWorkerDashboardPage> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(
-                icon,
-                color: color,
-                size: 28,
-              ),
+              Icon(icon, color: color, size: 28),
               const SizedBox(height: 4),
               Text(
                 label,
@@ -501,9 +506,7 @@ class _LocalWorkerDashboardPageState extends State<LocalWorkerDashboardPage> {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Card(
         margin: const EdgeInsets.symmetric(vertical: 8),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         color: Colors.white,
         elevation: 4,
         child: Padding(
@@ -519,11 +522,7 @@ class _LocalWorkerDashboardPageState extends State<LocalWorkerDashboardPage> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     padding: const EdgeInsets.all(12),
-                    child: Icon(
-                      Icons.pregnant_woman,
-                      color: color,
-                      size: 24,
-                    ),
+                    child: Icon(Icons.pregnant_woman, color: color, size: 24),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
@@ -550,7 +549,10 @@ class _LocalWorkerDashboardPageState extends State<LocalWorkerDashboardPage> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
                       color: color.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(12),
@@ -569,10 +571,7 @@ class _LocalWorkerDashboardPageState extends State<LocalWorkerDashboardPage> {
               const SizedBox(height: 12),
               Text(
                 'Sapling Photos: $completed/$total',
-                style: GoogleFonts.poppins(
-                  fontSize: 12,
-                  color: Colors.black,
-                ),
+                style: GoogleFonts.poppins(fontSize: 12, color: Colors.black),
               ),
               const SizedBox(height: 8),
               LinearProgressIndicator(
@@ -583,13 +582,8 @@ class _LocalWorkerDashboardPageState extends State<LocalWorkerDashboardPage> {
               ),
               const SizedBox(height: 12),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  TextButton.icon(
-                    onPressed: () {},
-                    icon: const Icon(Icons.photo_library, color: Colors.black),
-                    label: const Text('View Photos', style: TextStyle(color: Colors.black)),
-                  ),
                   ElevatedButton.icon(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green,
@@ -598,12 +592,16 @@ class _LocalWorkerDashboardPageState extends State<LocalWorkerDashboardPage> {
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => MotherVisitPage(motherName: name),
+                          builder: (context) =>
+                              MotherVisitPage(motherName: name),
                         ),
                       );
                     },
                     icon: const Icon(Icons.visibility, color: Colors.white),
-                    label: const Text('Visit', style: TextStyle(color: Colors.white)),
+                    label: const Text(
+                      'Visit',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ],
               ),
@@ -619,9 +617,7 @@ class _LocalWorkerDashboardPageState extends State<LocalWorkerDashboardPage> {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Card(
         margin: const EdgeInsets.symmetric(vertical: 8),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         color: Colors.white,
         elevation: 4,
         child: Padding(
@@ -669,190 +665,198 @@ class _LocalWorkerDashboardPageState extends State<LocalWorkerDashboardPage> {
                   shape: const StadiumBorder(),
                 ),
                 onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => Scaffold(
-                        appBar: AppBar(
-                          title: Text('Mother Details'),
-                          backgroundColor: Colors.green,
-                        ),
-                        body: SingleChildScrollView(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Name: ${mother['name']}',
-                                style: GoogleFonts.poppins(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: const Text('Mother Details'),
+                      content: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Name: ${mother['name']}',
+                              style: GoogleFonts.poppins(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'Husband/Father\'s Name: Rajesh Verma',
+                              style: GoogleFonts.poppins(
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'Phone Number: 9876543210',
+                              style: GoogleFonts.poppins(
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'Blood Group: B+',
+                              style: GoogleFonts.poppins(
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'Address: 123 Green Street, Raipur',
+                              style: GoogleFonts.poppins(
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'Delivery Date: 2025-07-10',
+                              style: GoogleFonts.poppins(
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'Delivery Address: City Hospital, Raipur',
+                              style: GoogleFonts.poppins(
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'City: Raipur',
+                              style: GoogleFonts.poppins(
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'District: Raipur',
+                              style: GoogleFonts.poppins(
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'Pincode: 492001',
+                              style: GoogleFonts.poppins(
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'Geolocation: 21.2514° N, 81.6296° E',
+                              style: GoogleFonts.poppins(
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'Pledge Plants: 5',
+                              style: GoogleFonts.poppins(
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'Pledge Photo:',
+                              style: GoogleFonts.poppins(
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Container(
+                              height: 120,
+                              width: 120,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                color: Colors.grey[200],
+                                image: const DecorationImage(
+                                  image: NetworkImage(
+                                    'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80',
+                                  ),
+                                  fit: BoxFit.cover,
                                 ),
                               ),
-                              const SizedBox(height: 8),
-                              Text(
-                                'Husband/Father\'s Name: Rajesh Verma',
-                                style: GoogleFonts.poppins(
-                                  fontSize: 16,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                'Phone Number: 9876543210',
-                                style: GoogleFonts.poppins(
-                                  fontSize: 16,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                'Blood Group: B+',
-                                style: GoogleFonts.poppins(
-                                  fontSize: 16,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                'Address: 123 Green Street, Raipur',
-                                style: GoogleFonts.poppins(
-                                  fontSize: 16,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                'Delivery Date: 2025-07-10',
-                                style: GoogleFonts.poppins(
-                                  fontSize: 16,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                'Delivery Address: City Hospital, Raipur',
-                                style: GoogleFonts.poppins(
-                                  fontSize: 16,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                'City: Raipur',
-                                style: GoogleFonts.poppins(
-                                  fontSize: 16,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                'District: Raipur',
-                                style: GoogleFonts.poppins(
-                                  fontSize: 16,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                'Pincode: 492001',
-                                style: GoogleFonts.poppins(
-                                  fontSize: 16,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                'Geolocation: 21.2514° N, 81.6296° E',
-                                style: GoogleFonts.poppins(
-                                  fontSize: 16,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                'Pledge Plants: 5',
-                                style: GoogleFonts.poppins(
-                                  fontSize: 16,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                'Pledge Photo:',
-                                style: GoogleFonts.poppins(
-                                  fontSize: 16,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Container(
-                                height: 120,
-                                width: 120,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12),
-                                  color: Colors.grey[200],
-                                  image: const DecorationImage(
-                                    image: NetworkImage(
-                                      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80',
-                                    ),
-                                    fit: BoxFit.cover,
+                            ),
+                            const SizedBox(height: 24),
+                            SizedBox(
+                              width: double.infinity,
+                              child: ElevatedButton.icon(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.green,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 24,
+                                    vertical: 12,
                                   ),
                                 ),
-                              ),
-                              const SizedBox(height: 24),
-                              SizedBox(
-                                width: double.infinity,
-                                child: ElevatedButton.icon(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.green,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 24,
-                                      vertical: 12,
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      assignedMothers.add({
-                                        'name': mother['name'] ?? '',
-                                        'id': 'MTN00${assignedMothers.length + 1}',
-                                        'photoStatus': 'Upload Pending',
-                                        'photoStatusColor': '0xFFD32F2F',
-                                        'photoStatusBg': '0xFFFEE2E2',
-                                        'icon': 'error',
-                                        'iconColor': '0xFFD32F2F',
-                                        'phone': '9999999999',
-                                        'address': 'Demo Address',
-                                      });
-                                      mothersList.removeWhere(
-                                        (m) => m['name'] == mother['name'],
-                                      );
-                                      mothersAssigned = assignedMothers.length;
+                                onPressed: () {
+                                  setState(() {
+                                    assignedMothers.add({
+                                      'name': mother['name'] ?? '',
+                                      'id':
+                                          'MTN00${assignedMothers.length + 1}',
+                                      'photoStatus': 'Upload Pending',
+                                      'photoStatusColor': '0xFFD32F2F',
+                                      'photoStatusBg': '0xFFFEE2E2',
+                                      'icon': 'error',
+                                      'iconColor': '0xFFD32F2F',
+                                      'phone': '9999999999',
+                                      'address': 'Demo Address',
                                     });
-                                    Navigator.of(context).pop();
-                                  },
-                                  icon: const Icon(Icons.person_add, color: Colors.white),
-                                  label: const Text(
-                                    'Assign',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                    mothersList.removeWhere(
+                                      (m) => m['name'] == mother['name'],
+                                    );
+                                    mothersAssigned = assignedMothers.length;
+                                  });
+                                  Navigator.of(context).pop();
+                                },
+                                icon: const Icon(
+                                  Icons.person_add,
+                                  color: Colors.white,
+                                ),
+                                label: const Text(
+                                  'Assign',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: const Text('Close'),
+                        ),
+                      ],
                     ),
                   );
                 },
                 icon: const Icon(Icons.person_add, color: Colors.white),
-                label: const Text('Assign', style: TextStyle(color: Colors.white)),
+                label: const Text(
+                  'Assign',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ],
           ),
@@ -915,79 +919,6 @@ class NotificationsPage extends StatelessWidget {
                 ),
               ),
             ),
-            PopupMenuButton<String>(
-              icon: const Icon(Icons.more_vert, color: Colors.black, size: 28),
-              onSelected: (value) {
-                if (value == 'logout') {
-                  // Handle logout
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text('Logout'),
-                        content: const Text('Are you sure you want to logout?'),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.of(context).pop(),
-                            child: const Text('Cancel'),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                              // Navigate to login page or perform logout
-                              Navigator.of(context).pushNamedAndRemoveUntil(
-                                '/',
-                                (route) => false,
-                              );
-                            },
-                            child: const Text('Logout'),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                } else if (value == 'help') {
-                  // Handle help
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text('Help'),
-                        content: const Text('For any assistance, please contact the support team at support@greencradle.com'),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.of(context).pop(),
-                            child: const Text('OK'),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                }
-              },
-              itemBuilder: (BuildContext context) => [
-                const PopupMenuItem<String>(
-                  value: 'logout',
-                  child: Row(
-                    children: [
-                      Icon(Icons.logout, color: Colors.black),
-                      SizedBox(width: 8),
-                      Text('Logout'),
-                    ],
-                  ),
-                ),
-                const PopupMenuItem<String>(
-                  value: 'help',
-                  child: Row(
-                    children: [
-                      Icon(Icons.help_outline, color: Colors.black),
-                      SizedBox(width: 8),
-                      Text('Help'),
-                    ],
-                  ),
-                ),
-              ],
-            ),
           ],
         ),
       ),
@@ -1010,7 +941,11 @@ class NotificationsPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 padding: const EdgeInsets.all(8),
-                child: const Icon(Icons.notifications_active, color: Colors.black, size: 28),
+                child: const Icon(
+                  Icons.notifications_active,
+                  color: Colors.red,
+                  size: 28,
+                ),
               ),
               title: Text(
                 notif['title']!,
@@ -1022,10 +957,7 @@ class NotificationsPage extends StatelessWidget {
               ),
               subtitle: Text(
                 notif['body']!,
-                style: GoogleFonts.poppins(
-                  fontSize: 14,
-                  color: Colors.black,
-                ),
+                style: GoogleFonts.poppins(fontSize: 14, color: Colors.black),
               ),
               trailing: Text(
                 notif['time']!,

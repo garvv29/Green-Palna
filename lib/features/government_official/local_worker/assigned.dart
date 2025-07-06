@@ -86,7 +86,7 @@ class _AssignedMothersPageState extends State<AssignedMothersPage> {
                   style: GoogleFonts.poppins(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
-                    color: Colors.green,
+                    color: Colors.black,
                     letterSpacing: -0.015 * 22,
                   ),
                 ),
@@ -96,7 +96,10 @@ class _AssignedMothersPageState extends State<AssignedMothersPage> {
               ...List.generate(mothers.length, (index) {
                 final mother = mothers[index];
                 return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
                   child: Card(
                     margin: const EdgeInsets.symmetric(vertical: 8),
                     shape: RoundedRectangleBorder(
@@ -123,27 +126,28 @@ class _AssignedMothersPageState extends State<AssignedMothersPage> {
                               children: [
                                 Container(
                                   decoration: BoxDecoration(
-                                    color: Colors.green.withValues(alpha: 0.1),
+                                    color: Colors.black.withOpacity(0.07),
                                     borderRadius: BorderRadius.circular(12),
                                   ),
                                   padding: const EdgeInsets.all(12),
                                   child: Icon(
                                     Icons.pregnant_woman,
-                                    color: Colors.green,
+                                    color: Colors.black,
                                     size: 24,
                                   ),
                                 ),
                                 const SizedBox(width: 12),
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         (mother['name'] as String?) ?? '',
                                         style: GoogleFonts.poppins(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16,
-                                          color: Colors.green,
+                                          color: Colors.black,
                                         ),
                                         overflow: TextOverflow.ellipsis,
                                       ),
@@ -151,26 +155,36 @@ class _AssignedMothersPageState extends State<AssignedMothersPage> {
                                         'ID: ${mother['id']}',
                                         style: GoogleFonts.poppins(
                                           fontSize: 12,
-                                          color: Colors.green.withValues(alpha: 0.7),
+                                          color: Colors.black,
                                         ),
                                       ),
                                     ],
                                   ),
                                 ),
                                 Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 4,
+                                  ),
                                   decoration: BoxDecoration(
-                                    color: (mother['photoStatusBg'] as Color).withValues(alpha: 0.1),
+                                    color: (mother['photoStatusBg'] as Color)
+                                        .withValues(alpha: 0.1),
                                     borderRadius: BorderRadius.circular(12),
                                   ),
-                                                                     child: Text(
-                                     (mother['photoStatus'] as String?) ?? '',
-                                     style: GoogleFonts.poppins(
-                                       fontSize: 12,
-                                       color: mother['photoStatusColor'] as Color,
-                                       fontWeight: FontWeight.w500,
-                                     ),
-                                   ),
+                                  child: Text(
+                                    (mother['photoStatus'] as String?) ?? '',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 12,
+                                      color:
+                                          ((mother['photoStatus'] as String?) ??
+                                                      '')
+                                                  .toLowerCase() ==
+                                              'uploaded & verified'
+                                          ? mother['photoStatusColor'] as Color
+                                          : Colors.black,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
@@ -180,19 +194,19 @@ class _AssignedMothersPageState extends State<AssignedMothersPage> {
                                 Icon(
                                   Icons.phone,
                                   size: 16,
-                                  color: Colors.green.withValues(alpha: 0.7),
+                                  color: Colors.black,
                                 ),
                                 const SizedBox(width: 8),
-                                                                 Expanded(
-                                   child: Text(
-                                     (mother['phone'] as String?) ?? '',
-                                     style: GoogleFonts.poppins(
-                                       fontSize: 14,
-                                       color: Colors.green,
-                                     ),
-                                     overflow: TextOverflow.ellipsis,
-                                   ),
-                                 ),
+                                Expanded(
+                                  child: Text(
+                                    (mother['phone'] as String?) ?? '',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 14,
+                                      color: Colors.black,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
                               ],
                             ),
                             const SizedBox(height: 4),
@@ -201,20 +215,20 @@ class _AssignedMothersPageState extends State<AssignedMothersPage> {
                                 Icon(
                                   Icons.location_on,
                                   size: 16,
-                                  color: Colors.green.withValues(alpha: 0.7),
+                                  color: Colors.black,
                                 ),
                                 const SizedBox(width: 8),
-                                                                 Expanded(
-                                   child: Text(
-                                     (mother['address'] as String?) ?? '',
-                                     style: GoogleFonts.poppins(
-                                       fontSize: 14,
-                                       color: Colors.green,
-                                     ),
-                                     overflow: TextOverflow.ellipsis,
-                                     maxLines: 2,
-                                   ),
-                                 ),
+                                Expanded(
+                                  child: Text(
+                                    (mother['address'] as String?) ?? '',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 14,
+                                      color: Colors.black,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 2,
+                                  ),
+                                ),
                               ],
                             ),
                             const SizedBox(height: 12),
@@ -223,10 +237,15 @@ class _AssignedMothersPageState extends State<AssignedMothersPage> {
                               children: [
                                 TextButton.icon(
                                   onPressed: () {},
-                                  icon: const Icon(Icons.photo_library, color: Colors.green),
+                                  icon: const Icon(
+                                    Icons.photo_library,
+                                    color: Colors.black,
+                                  ),
                                   label: Text(
                                     'View Photos',
-                                    style: GoogleFonts.poppins(color: Colors.green),
+                                    style: GoogleFonts.poppins(
+                                      color: Colors.black,
+                                    ),
                                   ),
                                 ),
                                 ElevatedButton.icon(
@@ -238,11 +257,16 @@ class _AssignedMothersPageState extends State<AssignedMothersPage> {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            MotherPhotoProgressPage(mother: mother),
+                                            MotherPhotoProgressPage(
+                                              mother: mother,
+                                            ),
                                       ),
                                     );
                                   },
-                                  icon: const Icon(Icons.visibility, color: Colors.white),
+                                  icon: const Icon(
+                                    Icons.visibility,
+                                    color: Colors.white,
+                                  ),
                                   label: Text(
                                     'View Details',
                                     style: GoogleFonts.poppins(
@@ -288,7 +312,7 @@ class MotherPhotoProgressPage extends StatelessWidget {
         title: Text(
           '${mother['name']} - Progress',
           style: GoogleFonts.poppins(
-            color: Colors.green,
+            color: Colors.black,
             fontSize: 20,
             fontWeight: FontWeight.bold,
             letterSpacing: -0.015 * 20,
@@ -318,7 +342,9 @@ class MotherPhotoProgressPage extends StatelessWidget {
                         children: [
                           CircleAvatar(
                             radius: 30,
-                            backgroundColor: Colors.green.withValues(alpha: 0.1),
+                            backgroundColor: Colors.green.withValues(
+                              alpha: 0.1,
+                            ),
                             child: Icon(
                               Icons.pregnant_woman,
                               color: Colors.green,
@@ -335,14 +361,14 @@ class MotherPhotoProgressPage extends StatelessWidget {
                                   style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18,
-                                    color: Colors.green,
+                                    color: Colors.black,
                                   ),
                                 ),
                                 Text(
                                   'ID: ${mother['id']}',
                                   style: GoogleFonts.poppins(
                                     fontSize: 14,
-                                    color: Colors.green.withValues(alpha: 0.7),
+                                    color: Colors.black,
                                   ),
                                 ),
                               ],
@@ -351,9 +377,17 @@ class MotherPhotoProgressPage extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 16),
-                      _buildInfoRow(Icons.phone, 'Phone', mother['phone'] ?? ''),
+                      _buildInfoRow(
+                        Icons.phone,
+                        'Phone',
+                        mother['phone'] ?? '',
+                      ),
                       const SizedBox(height: 8),
-                      _buildInfoRow(Icons.location_on, 'Address', mother['address'] ?? ''),
+                      _buildInfoRow(
+                        Icons.location_on,
+                        'Address',
+                        mother['address'] ?? '',
+                      ),
                     ],
                   ),
                 ),
@@ -365,7 +399,7 @@ class MotherPhotoProgressPage extends StatelessWidget {
                 style: GoogleFonts.poppins(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Colors.green,
+                  color: Colors.black,
                 ),
               ),
               const SizedBox(height: 12),
@@ -381,7 +415,9 @@ class MotherPhotoProgressPage extends StatelessWidget {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                          color: (mother['photoStatusBg'] as Color).withValues(alpha: 0.1),
+                          color: (mother['photoStatusBg'] as Color).withValues(
+                            alpha: 0.1,
+                          ),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         padding: const EdgeInsets.all(12),
@@ -400,7 +436,7 @@ class MotherPhotoProgressPage extends StatelessWidget {
                               'Planting Photo',
                               style: GoogleFonts.poppins(
                                 fontSize: 14,
-                                color: Colors.green.withValues(alpha: 0.7),
+                                color: Colors.black,
                               ),
                             ),
                             Text(
@@ -408,7 +444,20 @@ class MotherPhotoProgressPage extends StatelessWidget {
                               style: GoogleFonts.poppins(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
-                                color: mother['photoStatusColor'] as Color,
+                                color:
+                                    ((mother['photoStatus']
+                                                ?.toString()
+                                                .toLowerCase() ??
+                                            '') ==
+                                        'upload pending')
+                                    ? mother['photoStatusColor'] as Color
+                                    : ((mother['photoStatus']
+                                                  ?.toString()
+                                                  .toLowerCase() ??
+                                              '') ==
+                                          'uploaded & verified')
+                                    ? mother['photoStatusColor'] as Color
+                                    : Colors.black,
                               ),
                             ),
                           ],
@@ -475,25 +524,18 @@ class MotherPhotoProgressPage extends StatelessWidget {
   Widget _buildInfoRow(IconData icon, String label, String value) {
     return Row(
       children: [
-        Icon(
-          icon,
-          size: 16,
-          color: Colors.green.withValues(alpha: 0.7),
-        ),
+        Icon(icon, size: 16, color: Colors.black),
         const SizedBox(width: 8),
         Text(
           '$label: ',
-          style: GoogleFonts.poppins(
-            fontSize: 14,
-            color: Colors.green.withValues(alpha: 0.7),
-          ),
+          style: GoogleFonts.poppins(fontSize: 14, color: Colors.black),
         ),
         Expanded(
           child: Text(
             value,
             style: GoogleFonts.poppins(
               fontSize: 14,
-              color: Colors.green,
+              color: Colors.black,
               fontWeight: FontWeight.w500,
             ),
             overflow: TextOverflow.ellipsis,

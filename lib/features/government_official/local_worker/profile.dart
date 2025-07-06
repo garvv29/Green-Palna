@@ -42,7 +42,7 @@ class ProfileScreen extends StatelessWidget {
                   style: GoogleFonts.poppins(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
-                    color: Colors.green,
+                    color: Colors.black,
                     letterSpacing: -0.015 * 22,
                   ),
                 ),
@@ -66,7 +66,7 @@ class ProfileScreen extends StatelessWidget {
                       style: GoogleFonts.poppins(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: Colors.green,
+                        color: Colors.black,
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -75,7 +75,7 @@ class ProfileScreen extends StatelessWidget {
                       'Mitanin Worker',
                       style: GoogleFonts.poppins(
                         fontSize: 14,
-                        color: Colors.green,
+                        color: Colors.black,
                         fontWeight: FontWeight.w500,
                       ),
                       textAlign: TextAlign.center,
@@ -85,7 +85,7 @@ class ProfileScreen extends StatelessWidget {
                       'ID: MTN789012',
                       style: GoogleFonts.poppins(
                         fontSize: 14,
-                        color: Colors.green,
+                        color: Colors.black,
                         fontWeight: FontWeight.w500,
                       ),
                       textAlign: TextAlign.center,
@@ -129,7 +129,7 @@ class ProfileScreen extends StatelessWidget {
                   style: GoogleFonts.poppins(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: Colors.green,
+                    color: Colors.black,
                   ),
                 ),
               ),
@@ -205,9 +205,7 @@ class ProfileScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Card(
         margin: const EdgeInsets.symmetric(vertical: 4),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         color: Colors.white,
         elevation: 2,
         child: Padding(
@@ -218,10 +216,10 @@ class ProfileScreen extends StatelessWidget {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: Colors.green.withValues(alpha: 0.1),
+                  color: Colors.black.withOpacity(0.07),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Icon(icon, color: Colors.green, size: 20),
+                child: Icon(icon, color: Colors.black, size: 20),
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -232,7 +230,7 @@ class ProfileScreen extends StatelessWidget {
                       title,
                       style: GoogleFonts.poppins(
                         fontSize: 12,
-                        color: Colors.green.withValues(alpha: 0.7),
+                        color: Colors.black,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -241,7 +239,7 @@ class ProfileScreen extends StatelessWidget {
                       value,
                       style: GoogleFonts.poppins(
                         fontSize: 14,
-                        color: Colors.green,
+                        color: Colors.black,
                         fontWeight: FontWeight.w600,
                       ),
                       overflow: TextOverflow.ellipsis,
@@ -258,10 +256,18 @@ class ProfileScreen extends StatelessWidget {
   }
 
   void _showEditProfileDialog(BuildContext context) {
-    final TextEditingController nameController = TextEditingController(text: name);
-    final TextEditingController phoneController = TextEditingController(text: '+91 98765 43210');
-    final TextEditingController addressController = TextEditingController(text: '123 Green Street, Raipur, Chhattisgarh');
-    final TextEditingController emailController = TextEditingController(text: 'anya.sharma@greenpaalan.com');
+    final TextEditingController nameController = TextEditingController(
+      text: name,
+    );
+    final TextEditingController phoneController = TextEditingController(
+      text: '+91 98765 43210',
+    );
+    final TextEditingController addressController = TextEditingController(
+      text: '123 Green Street, Raipur, Chhattisgarh',
+    );
+    final TextEditingController emailController = TextEditingController(
+      text: 'anya.sharma@greenpaalan.com',
+    );
 
     showDialog(
       context: context,

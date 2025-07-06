@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'nursedash.dart';
+import '../idk/newsystem.dart';
 
 class HealthWorkerLoginPage extends StatefulWidget {
   const HealthWorkerLoginPage({super.key});
@@ -227,28 +228,40 @@ class _HealthWorkerLoginPageState extends State<HealthWorkerLoginPage> {
                   ),
                 ),
 
-                // "New Health Worker? Register"
-                Align(
-                  alignment: Alignment.center,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 20),
-                    child: GestureDetector(
-                      onTap: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Health Worker Registration functionality not implemented.'),
-                            duration: Duration(seconds: 1),
+                // New User Registration Button
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  child: SizedBox(
+                    height: 48,
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LocalWorkerProfileFormScreen(
+                              headerTitle: 'Health Worker Registration',
+                            ),
                           ),
                         );
                       },
-                      child: Text(
-                        'New Health Worker? Register',
-                        textAlign: TextAlign.center,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        foregroundColor: const Color(0xFF50D22C),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(999),
+                          side: const BorderSide(color: Color(0xFF50D22C), width: 2),
+                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        elevation: 0,
+                      ),
+                      child: const Text(
+                        'New User? Register',
                         style: TextStyle(
-                          color: const Color(0xFF629155),
-                          fontSize: 14,
-                          fontWeight: FontWeight.normal,
-                          decoration: TextDecoration.underline,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          height: 1.5,
+                          letterSpacing: 0.015 * 16,
                         ),
                       ),
                     ),

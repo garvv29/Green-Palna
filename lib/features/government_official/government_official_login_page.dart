@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gp1/features/government_official/local_worker/local_worker_dashboard_page.dart'; // Import the LocalWorkerDashboardPage
 import 'package:gp1/features/government_official/adhikari/adhikari_dash.dart'; // Import the AdhikariDashboardPage
+import '../idk/newsystem.dart';
 
 class GovernmentOfficialLoginPage extends StatefulWidget {
   const GovernmentOfficialLoginPage({super.key});
@@ -198,7 +199,7 @@ class _GovernmentOfficialLoginPageState extends State<GovernmentOfficialLoginPag
                           fontWeight: FontWeight.normal,
                         ),
                         items: const [
-                          DropdownMenuItem(value: 'local_worker', child: Text('Mitanin')), // Updated label
+                          DropdownMenuItem(value: 'local_worker', child: Text('Local Worker')), // Updated label
                           DropdownMenuItem(value: 'official', child: Text('Official')), // Updated value
                         ],
                         onChanged: (String? newValue) {
@@ -267,10 +268,10 @@ class _GovernmentOfficialLoginPageState extends State<GovernmentOfficialLoginPag
                         } else {
                           // If no option is selected, prompt the user
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Please select a role option (Mitanin or Official).'),
-                              duration: Duration(seconds: 2),
-                            ),
+                                                      const SnackBar(
+                            content: Text('Please select a role option (Local Worker or Official).'),
+                            duration: Duration(seconds: 2),
+                          ),
                           );
                         }
                       },
@@ -296,29 +297,40 @@ class _GovernmentOfficialLoginPageState extends State<GovernmentOfficialLoginPag
                   ),
                 ),
 
-                // "New Official? Register"
-                Align(
-                  alignment: Alignment.center,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 20), // pb-3 pt-1 px-4
-                    child: GestureDetector(
-                      onTap: () {
-                        // Handle register tap
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Government Official Registration functionality not implemented.'),
-                            duration: Duration(seconds: 1),
+                // New User Registration Button
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  child: SizedBox(
+                    height: 48,
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LocalWorkerProfileFormScreen(
+                              headerTitle: 'Government Official Registration',
+                            ),
                           ),
                         );
                       },
-                      child: Text(
-                        'New Official? Register',
-                        textAlign: TextAlign.center,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        foregroundColor: const Color(0xFF50D22C),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(999),
+                          side: const BorderSide(color: Color(0xFF50D22C), width: 2),
+                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        elevation: 0,
+                      ),
+                      child: const Text(
+                        'New User? Register',
                         style: TextStyle(
-                          color: const Color(0xFF668A5C), // text-[#668a5c]
-                          fontSize: 14,
-                          fontWeight: FontWeight.normal,
-                          decoration: TextDecoration.underline,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          height: 1.5,
+                          letterSpacing: 0.015 * 16,
                         ),
                       ),
                     ),

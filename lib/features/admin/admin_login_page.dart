@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'admin_dashboard_page.dart';
+import '../idk/newsystem.dart';
 
 class AdminLoginPage extends StatefulWidget {
   const AdminLoginPage({super.key});
@@ -147,7 +148,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
 
                 // Login Button
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                   child: SizedBox(
                     height: 48,
                     width: double.infinity,
@@ -169,6 +170,46 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                       ),
                       child: const Text(
                         'Login',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          height: 1.5,
+                          letterSpacing: 0.015 * 16,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
+                // New User Registration Button
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  child: SizedBox(
+                    height: 48,
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LocalWorkerProfileFormScreen(
+                              headerTitle: 'Admin Registration',
+                            ),
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        foregroundColor: const Color(0xFF50D22C),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(999),
+                          side: const BorderSide(color: Color(0xFF50D22C), width: 2),
+                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        elevation: 0,
+                      ),
+                      child: const Text(
+                        'New User? Register',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
